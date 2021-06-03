@@ -1,2 +1,3 @@
 # interactive-form
- An online, interactive form designde accessibility best practices in mind as according to the WCAG and validates user input
+
+An online, interactive form designed accessibility best practices in mind according to the WCAG and validates user input.
