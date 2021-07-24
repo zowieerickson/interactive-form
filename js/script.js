@@ -183,31 +183,31 @@ form.addEventListener("submit", (e) => {
   // e.preventDefault();
 
   if (!nameValidator()) {
-    console.log("Name field is empty");
+    // console.log("Name field is empty");
     e.preventDefault();
   }
 
   if (!emailValidator()) {
-    console.log("Email must contain '@' and '.com'");
+    // console.log("Email must contain '@' and '.com'");
     e.preventDefault();
   }
 
   if (!activityValidator()) {
-    console.log("Must select at least 1 language");
+    // console.log("Must select at least 1 language");
     e.preventDefault();
   }
 
   if (payment.value == "credit-card") {
     if (!cardNumberValidator()) {
-      console.log("Card Number must be between 13 - 16 digits");
+      // console.log("Card Number must be between 13 - 16 digits");
       e.preventDefault();
     }
     if (!cvvValidator()) {
-      console.log("CVV must be 3 digits");
+      // console.log("CVV must be 3 digits");
       e.preventDefault();
     }
     if (!zipValidator()) {
-      console.log("Zip must be 5 digits");
+      // console.log("Zip must be 5 digits");
       e.preventDefault();
     }
   }
