@@ -15,8 +15,18 @@ const activities = document.querySelector("#activities");
 const activityCost = document.querySelectorAll(".activity-cost");
 const totalCost = document.querySelector("#total-cost");
 const checkboxes = document.querySelectorAll("#activities input");
+// const checkbox = document.querySelector("#activities-box input");
 const payment = document.querySelector("#payment");
 const form = document.querySelector("form");
+
+for (let i = 0; i < checkboxes.length; i++) {
+  checkboxes[i].addEventListener("focus", () => {
+    checkboxes[i].parentElement.classList.add("focus");
+  });
+  checkboxes[i].addEventListener("blur", () => {
+    checkboxes[i].parentElement.classList.remove("focus");
+  });
+}
 
 // Intros
 name.focus();
@@ -142,7 +152,7 @@ const activityValidator = () => {
 
 const cardNumberValidator = () => {
   const cardValue = document.querySelector("#cc-num").value;
-  const cardIsValid = /\d{16}|\d{13}/.test(cardValue);
+  const cardIsValid = /^\d{16}$|^\d{13}$/.test(cardValue);
 
   if (cardIsValid) {
     validationPass(ccNum);
@@ -154,7 +164,7 @@ const cardNumberValidator = () => {
 
 const cvvValidator = () => {
   const cvvValue = document.querySelector("#cvv").value;
-  const cvvIsValid = /\d{3}/.test(cvvValue);
+  const cvvIsValid = /^\d{3}$/.test(cvvValue);
 
   if (cvvIsValid) {
     validationPass(cvv);
@@ -167,11 +177,11 @@ const cvvValidator = () => {
 
 const zipValidator = () => {
   const zipValue = document.querySelector("#zip").value;
-  const zipIsValid = /\d{5}/.test(zipValue);
+  const zipIsValid = /^\d{5}$/.test(zipValue);
 
   if (zipIsValid) {
     validationPass(zip);
-  } else {
+  } else if (!zipIsValid) {
     validationFail(zip);
   }
 
