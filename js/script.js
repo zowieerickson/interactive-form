@@ -15,10 +15,12 @@ const activities = document.querySelector("#activities");
 const activityCost = document.querySelectorAll(".activity-cost");
 const totalCost = document.querySelector("#total-cost");
 const checkboxes = document.querySelectorAll("#activities input");
-// const checkbox = document.querySelector("#activities-box input");
 const payment = document.querySelector("#payment");
 const form = document.querySelector("form");
 
+/**
+ * Adds listeners to Activity checkboxes, adding/removing focus class
+ */
 for (let i = 0; i < checkboxes.length; i++) {
   checkboxes[i].addEventListener("focus", () => {
     checkboxes[i].parentElement.classList.add("focus");
@@ -35,7 +37,9 @@ color.disabled = true;
 document.querySelector("#paypal").style.display = "none";
 document.querySelector("#bitcoin").style.display = "none";
 
-// Job role selection
+/**
+ * If 'Other' for job role is selected, display another input box
+ */
 jobRole.addEventListener("change", () => {
   if (jobRole.value == "other") {
     otherJobRole.style.display = "";
@@ -44,7 +48,9 @@ jobRole.addEventListener("change", () => {
   }
 });
 
-// Shirt selection
+/**
+ * If JS Puns is selected, only display matching shirts by hiding/showing; vice versa with <3 JS
+ */
 design.addEventListener("change", () => {
   color.disabled = false;
 
@@ -73,7 +79,9 @@ design.addEventListener("change", () => {
   }
 });
 
-// Activities calculation
+/**
+ * Calculates activities by using the respsective 'data-cost' attribute. Will add and subtract if checked or not
+ */
 let total = 0;
 activities.addEventListener("change", (e) => {
   let clicked = e.target;
@@ -87,7 +95,9 @@ activities.addEventListener("change", (e) => {
   totalCost.innerHTML = total;
 });
 
-// Payment Info
+/**
+ * Will hide other payment types except for the selected one
+ */
 payment.addEventListener("change", () => {
   if (payment.value == "paypal") {
     document.querySelector("#credit-card").style.display = "none";
@@ -104,7 +114,9 @@ payment.addEventListener("change", () => {
   }
 });
 
-// Validation
+/**
+ * Validation helper functions. If it passes, add 'valid' class & remove '.not-valid, if not, remove '.valid' class and add '.not-valid'
+ */
 const validationPass = (element) => {
   element.parentElement.classList.add("valid");
   element.parentElement.classList.remove("not-valid");
@@ -117,6 +129,9 @@ const validationFail = (element) => {
   element.parentElement.lastElementChild.style.display = "block";
 };
 
+/**
+ * Validation helper functions. Testing with regex then passed into the ValidationPass/ValidationFail functions
+ */
 const nameValidator = () => {
   const nameValue = document.querySelector("#name").value;
   const nameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameValue);
@@ -188,6 +203,9 @@ const zipValidator = () => {
   return zipIsValid;
 };
 
+/**
+ * Form event listener. If any of the inputs do not pass the regex test, the form will not submit
+ */
 form.addEventListener("submit", (e) => {
   if (!nameValidator()) {
     e.preventDefault();
@@ -201,6 +219,9 @@ form.addEventListener("submit", (e) => {
     e.preventDefault();
   }
 
+  /**
+   * Will only test for credit card inputs if credit card is selected as payment
+   */
   if (payment.value == "credit-card") {
     if (!cardNumberValidator()) {
       e.preventDefault();
