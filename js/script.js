@@ -22,6 +22,8 @@ const form = document.querySelector("form");
 name.focus();
 otherJobRole.style.display = "none";
 color.disabled = true;
+document.querySelector("#paypal").style.display = "none";
+document.querySelector("#bitcoin").style.display = "none";
 
 // Job role selection
 jobRole.addEventListener("change", () => {
@@ -75,6 +77,7 @@ activities.addEventListener("change", (e) => {
   totalCost.innerHTML = total;
 });
 
+// Payment Info
 payment.addEventListener("change", () => {
   if (payment.value == "paypal") {
     document.querySelector("#credit-card").style.display = "none";
@@ -92,7 +95,6 @@ payment.addEventListener("change", () => {
 });
 
 // Validation
-
 const validationPass = (element) => {
   element.parentElement.classList.add("valid");
   element.parentElement.classList.remove("not-valid");
@@ -130,13 +132,11 @@ const emailValidator = () => {
 
 const activityValidator = () => {
   const activitySectionIsValid = total > 0;
-
   if (activitySectionIsValid) {
     validationPass(activitiesBox);
   } else {
     validationFail(activitiesBox);
   }
-
   return activitySectionIsValid;
 };
 
@@ -149,7 +149,6 @@ const cardNumberValidator = () => {
   } else {
     validationFail(ccNum);
   }
-
   return cardIsValid;
 };
 
@@ -180,37 +179,27 @@ const zipValidator = () => {
 };
 
 form.addEventListener("submit", (e) => {
-  // e.preventDefault();
-
   if (!nameValidator()) {
-    // console.log("Name field is empty");
     e.preventDefault();
   }
 
   if (!emailValidator()) {
-    // console.log("Email must contain '@' and '.com'");
     e.preventDefault();
   }
 
   if (!activityValidator()) {
-    // console.log("Must select at least 1 language");
     e.preventDefault();
   }
 
   if (payment.value == "credit-card") {
     if (!cardNumberValidator()) {
-      // console.log("Card Number must be between 13 - 16 digits");
       e.preventDefault();
     }
     if (!cvvValidator()) {
-      // console.log("CVV must be 3 digits");
       e.preventDefault();
     }
     if (!zipValidator()) {
-      // console.log("Zip must be 5 digits");
       e.preventDefault();
     }
   }
-
-  // e.preventDefault();
 });
